@@ -14,6 +14,9 @@ CRITERIOS DE EVALUACIÓN
 -un título
 */
 
+//VARIABLES GLOBALES:
+
+bool salida = false;
 
 void print_start_screen(){
     for (int j= 0; j < 20; j++){
@@ -68,65 +71,84 @@ void start_game(){
         cout << endl;
     }
 
-    cout << R"(Heladero: "¿Qué te sirvo?")" << endl << endl;
-    cout << "1- Sabor Frutilla\n";
-    cout << "2- Sabor Vino\n";
-    cout << "3- Sabor Trapo de Piso\n";
+    bool volver;
+    volver = true;
 
-    for (int i = 0; i < 4; i++){
-        cout << endl;
-    }
-    
-    enum opciones_de_sabor{
-        NORMAL=1,
-        ALCOHOL,
-        RARO
-    };
-
-    int opcion_elegida;
-
-    cin >> opcion_elegida;
-
-    switch (opcion_elegida)
-    {
-    case NORMAL:
-        cout << "¿Un helado de Frutilla? ¡Perfecto!\n";
-        cout << "*se le cae el helado*\n";
-        //acá viene otra imagen probablemente"
-        break;
-    case ALCOHOL:
-        cout << "Ok, pero para ese sabor te voy a tener hacer un par de preguntas. ¿Listo?\n";
+    while (volver == true){
+        volver = false;
+        cout << R"(Heladero: "¿Qué te sirvo?")" << endl << endl;
+        cout << "1- Sabor Frutilla\n";
+        cout << "2- Sabor Vino\n";
+        cout << "3- Sabor Trapo de Piso\n\n";
         
-        bool listo; //declaro la variable booleana "listo"
+        enum opciones_de_sabor{
+            NORMAL=1,
+            ALCOHOL,
+            RARO
+        };
 
-        cout << "1- Sí \t\t 2- No\n";
-        cin >> listo;   //usuario ingresa si está listo (listo == true) o si no está listo (listo == false)
+        int opcion_elegida;
 
-        if (listo == true){ //el usuario está listo, entonces empiezo las preguntas
-            cout << "¿Qué edad tenés?\n";
-            int edad;
-            cin >> edad;
-            if (edad < 18){
-                cout << "Sos menor, mejor pedite otro sabor.\n";
-            }else{
-                //sigue otra pregunta, sí es mayor
-                cout << "acá vienen más preguntas, ponele";
+        string respuesta;
+        bool no_respondio = true;
+        
+        cin >> opcion_elegida;
+    
+        switch (opcion_elegida){
+            case NORMAL:
+                cout << "¿Un helado de Frutilla? ¡Perfecto!\n";
+                cout << "*se le cae el helado*\n";
+                //acá viene otra imagen probablemente"
+                break;
+            case ALCOHOL:
+                cout << "Ok, pero para ese sabor te voy a tener hacer un par de preguntas. ¿Listo? (s/n)\n";
+                
+                bool listo;
+                listo = true;
+
+                while (no_respondio == true){
+                    cin >> respuesta;
+                    if (respuesta == "s" || respuesta == "S"){
+                        listo = true;
+                        no_respondio = false;
+                    }else if (respuesta == "n" || respuesta == "N"){
+                        listo = false;
+                        no_respondio = false;
+                    }else{
+                        cout << "Respondé mi pregunta flacx\n";
+                    }
+                }
+            
+            if (listo == true){ //el usuario está listo, entonces empiezo las preguntas
+                cout << "¿Qué edad tenés?\n";
+                int edad;
+                cin >> edad;
+                if (edad < 18){
+                    cout << "Sos menor, mejor pedite otro sabor.\n\n";
+                    volver = true;
+                }else{
+                    //sigue otra pregunta, sí es mayor
+                    cout << "acá vienen más preguntas, ponele\n";
+                }
+            }else{      //el usuario no está listo
+                cout << "Entonces pedite otro sabor.\n";
+                volver = true;
             }
-        }else{      //el usuario no está listo
-            cout << "Entonces pedite otro sabor.\n";
+            break;
+        case RARO:
+            cout << "¡Finalmente alguien pide los sabores buenos!\n";
+            cout << "Probás el helado.\n" << "...\n" << "¡Está buenísimo! ¡¿Cómo no probaste esto antes?!\n" << "...\n";
+            //cambiamos a una imagen de un hospital
+            cout << "*acá cambiamos a un hospital o lápida o algo\n";
+            break;
+        default:
+            cout << "escribí bien amigx";
+            break;
         }
-        break;
-    case RARO:
-        cout << "¡Finalmente alguien pide los sabores buenos!\n";
-        cout << "Probás el helado.\n" << "...\n" << "¡Está buenísimo! ¡¿Cómo no probaste esto antes?!\n" << "...\n";
-        //cambiamos a una imagen de un hospital
-        cout << "*acá cambiamos a un hospital o lápida o algo";
-        break;
-    default:
-        cout << "escribí bien amigx";
-        break;
     }
 
+    cout << "Gracias por jugar!\n" << "Apretá Enter para volver al menú...\n";
+    cin.ignore().get();
     return;
 }
 
@@ -139,10 +161,10 @@ void main_menu(){
     enum dificultad{
         START=1,
         CREDITS,
-        EXIT
+        SALIR
     };
 
-    cout << "Ingresá una opción...\n";
+    cout << "Ingresá una opción...\n" << "1- Comenzar\n" << "2- Créditos\n" << "3- Salir a la terminal\n";
     cin >> option;
 
     switch (option)
@@ -152,15 +174,17 @@ void main_menu(){
         break;
     case CREDITS:
         cout << "esto todavía no está programado... \n";
+        cout << "Apretá Enter para volver al menú...\n";
+        cin.ignore().get();
         break;
-    case EXIT:
-        cout << "esto todavía no está programado... \n";
+    case SALIR:
+        salida = true;
+        cout << "¡¡Muchas gracias por jugar!!\n";
         break;
     default:
         cout << "escribí otro número gil\n";
         break;
     }
-
     return;
 }
 
@@ -171,9 +195,10 @@ int main(){
 
     print_start_screen();
     
-    main_menu();
+    while (salida == false){
+        main_menu();
+    }
 
-    cout << "Gracias por jugar!\n";
     return 0;
 }
 
