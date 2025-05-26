@@ -26,7 +26,7 @@ void mostrar_pantalla_inicio()
     return;
 }
 
-void start_game()
+void empezar_juego()
 {
     system("clear");
 
@@ -129,10 +129,12 @@ void start_game()
 
     cout << "Gracias por jugar!\n" << "Apretá Enter para volver al menú...\n";
     cin.ignore().get();
+    cout << "Gracias por jugar!\n" << "Apretá Enter para volver al menú...\n";
+    cin.ignore().get();
     return;
 }
 
-void main_menu()
+void menu_principal()
 {
     system("clear");
 
@@ -140,8 +142,8 @@ void main_menu()
 
     enum dificultad
     {
-        START = 1,
-        CREDITS,
+        EMPEZAR = 1,
+        CREDITOS,
         SALIR
     };
 
@@ -153,23 +155,23 @@ void main_menu()
 
     switch (opcion)
     {
-    case START:
-        start_game();
+    case EMPEZAR:
+        empezar_juego();
         break;
-    case CREDITS:
+    case CREDITOS:
         cout << "esto todavía no está programado... \n";
+        cout << "Apretá Enter para volver al menú...\n";
+        cin.ignore().get();
         cout << "Apretá Enter para volver al menú...\n";
         cin.ignore().get();
         break;
     case SALIR:
         salida = true;
         cout << "¡¡Muchas gracias por jugar!!\n";
-        break;
     default:
         cout << "escribí otro número gil\n";
         break;
     }
-
     return;
 }
 
@@ -181,7 +183,7 @@ int main()
 
     while (salida == false)
     {
-        main_menu();
+        menu_principal();
     }
 
     return 0;
