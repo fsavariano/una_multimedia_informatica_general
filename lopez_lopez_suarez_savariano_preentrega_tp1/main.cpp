@@ -129,8 +129,7 @@ void empezar_juego()
 
     cout << "Gracias por jugar!\n" << "Apretá Enter para volver al menú...\n";
     cin.ignore().get();
-    cout << "Gracias por jugar!\n" << "Apretá Enter para volver al menú...\n";
-    cin.ignore().get();
+    
     return;
 }
 
@@ -161,13 +160,11 @@ void menu_principal()
     case CREDITOS:
         cout << "esto todavía no está programado... \n";
         cout << "Apretá Enter para volver al menú...\n";
-        cin.ignore().get();
-        cout << "Apretá Enter para volver al menú...\n";
-        cin.ignore().get();
         break;
     case SALIR:
         salida = true;
         cout << "¡¡Muchas gracias por jugar!!\n";
+        break;
     default:
         cout << "escribí otro número gil\n";
         break;
