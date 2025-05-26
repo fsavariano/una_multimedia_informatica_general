@@ -34,6 +34,8 @@ void empezar_juego()
     volver = true;
 
     vector<string> sabores_normales = {"Frutilla"};
+    vector<string> sabores_alcohol = {"Vino"};
+    vector<string> sabores_raros = {"Trapo de Piso"};
 
     while (volver == true)
     {
@@ -129,7 +131,7 @@ void empezar_juego()
 
     cout << "Gracias por jugar!\n" << "Apretá Enter para volver al menú...\n";
     cin.ignore().get();
-    
+
     return;
 }
 
