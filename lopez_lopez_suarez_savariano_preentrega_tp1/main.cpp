@@ -1,4 +1,5 @@
 #include <iostream>
+#include <random>
 #include <string>
 #include <vector>
 
@@ -30,29 +31,42 @@ void empezar_juego()
 {
     system("clear");
 
+    random_device random;
+    int semilla = random();
+    default_random_engine generador_random(semilla);
+
     bool volver;
     volver = true;
 
-    vector<string> sabores_normales = {"Frutilla"};
-    vector<string> sabores_alcohol = {"Vino"};
-    vector<string> sabores_raros = {"Trapo de Piso"};
+    float precio = 0.0;
+
+    vector<string> sabores_normales = {"Frutilla", "Chocolate", "Vainilla"};
+    vector<string> sabores_alcohol = {"Vino", "White Russian"};
+    vector<string> sabores_raros = {"Trapo de Piso", "Hormiga, Damasco y Pimienta"};
+    string opcion_normal = sabores_normales[generador_random() % sabores_normales.size()];
+    string opcion_alcohol = sabores_alcohol[generador_random() % sabores_alcohol.size()];
+    string opcion_raro = sabores_raros[generador_random() % sabores_raros.size()];
 
     while (volver == true)
     {
         volver = false;
-        cout << R"(Heladero: "¿Qué te sirvo?")" << endl << endl;
-        cout << "1- Sabor " << sabores_normales[0] << endl;
-        cout << "2- Sabor Vino\n";
-        cout << "3- Sabor Trapo de Piso\n\n";
+
+        cout << "Heladero: \"¿Qué te sirvo?\"\n\n";
+        cout << "1- Sabor " << opcion_normal << endl;
+        cout << "2- Sabor " << opcion_alcohol << endl;
+        cout << "3- Sabor " << opcion_raro << endl;
+        cout << "4- Más sabores\n\n";
 
         enum opciones_de_sabor
         {
             NORMAL = 1,
             ALCOHOL,
-            RARO
+            RARO,
+            OTROS
         };
 
         int opcion_elegida;
+        cout << endl;
 
         string respuesta;
         bool no_respondio = true;
@@ -62,8 +76,11 @@ void empezar_juego()
         switch (opcion_elegida)
         {
         case NORMAL:
-            cout << "¿Un helado de Frutilla? ¡Perfecto!\n";
-            cout << "*se le cae el helado*\n";
+            cout << "¿Un helado de Frutilla? ¡Perfecto!\n"
+                 << "\"Heladero, en susurros: \"Qué aburrido...\"\n"
+                 << "*se le cae el helado*\n"
+                 << "Heladero: \"...\"\n"
+                 << "Heladero: \"...  El precio es de $" << precio << " igual.\"\n\n";
             // acá viene otra imagen probablemente"
             break;
         case ALCOHOL:
@@ -115,21 +132,33 @@ void empezar_juego()
             }
             break;
         case RARO:
-            cout << "¡Finalmente alguien pide los sabores buenos!\n";
+            cout << "\"¡Finalmente alguien pide los sabores buenos!\"\n";
             cout << "Probás el helado.\n"
-                 << "...\n"
+                 << "\"...\"\n"
                  << "¡Está buenísimo! ¡¿Cómo no probaste esto antes?!\n"
-                 << "...\n";
+                 << "\"...\"\n";
             // cambiamos a una imagen de un hospital
             cout << "*acá cambiamos a un hospital o lápida o algo\n";
             break;
+        case OTROS:
+            cout << "Heladero: \"Claro, más sabores. Pero sólo puedo mostrarte "
+                    "tres. No preguntes.\""
+                 << endl;
+            volver = true;
+            opcion_normal = generador_random() % sabores_normales.size();
+            opcion_alcohol = generador_random() % sabores_alcohol.size();
+            opcion_raro = generador_random() % sabores_raros.size();
+            break;
         default:
-            cout << "escribí bien amigx";
+            cout << "\nEl heladero te mira con cara extrañada.\n"
+                 << "Heladero: \"No sé si te entendí.\"\n";
+            volver = true;
             break;
         }
     }
 
-    cout << "Gracias por jugar!\n" << "Apretá Enter para volver al menú...\n";
+    cout << "Gracias por jugar!\n"
+         << "Apretá Enter para volver al menú...\n";
     cin.ignore().get();
 
     return;
@@ -151,8 +180,9 @@ void menu_principal()
     cout << "Ingresá una opción...\n"
          << "1- Comenzar\n"
          << "2- Créditos\n"
-         << "3- Salir a la terminal\n";
+         << "3- Salir a la terminal\n\n";
     cin >> opcion;
+    cout << endl;
 
     switch (opcion)
     {
@@ -160,15 +190,19 @@ void menu_principal()
         empezar_juego();
         break;
     case CREDITOS:
-        cout << "esto todavía no está programado... \n";
+        cout << "esto todavía no está programado... \n\n";
         cout << "Apretá Enter para volver al menú...\n";
+        cin.ignore();
+        cin.clear();
+        cin.get();
         break;
     case SALIR:
         salida = true;
         cout << "¡¡Muchas gracias por jugar!!\n";
         break;
     default:
-        cout << "escribí otro número gil\n";
+        cout << "Por favor, seleccioná una de las opciones.\n\n";
+        cin.ignore().get();
         break;
     }
     return;
