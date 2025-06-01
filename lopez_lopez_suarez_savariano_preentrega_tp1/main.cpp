@@ -79,11 +79,43 @@ void empezar_juego()
     {
         volver = false;
 
-        cout << "Heladero: \"¿Qué te sirvo?\"\n\n";
+        cout << R"(                                                        ■■■
+                                                      ■■■ ■■■                    ■■                                     
+                                                     ■■  ■  ■■                  ■■■                                     
+                                                    ■■■■■ ■■■■■                ■■ ■■                                    
+                                                   ■■         ■■               ■   ■                                    
+                                                   ■    ■■■    ■              ■■   ■■                                   
+                                                  • ■■■■■ ■■■■■■•            ■■     ■■                                  
+                                                  •             •            ■■■■■■■■■                                  
+                                                  •   ••• •••   •            ■■■    ■■                                  
+                                                  •   • • • •   •              ■■  ■■                                   
+                                                  •             •               ■  ■                                    
+                                                   •  ••   ••  •               ■■■■■                                    
+                                                    •  •••••  •              ••• ■•                                     
+                                                     •        •              •    •                                     
+                                              ••••■■■•••••••••■■■•          ••    •                                     
+                                             •    ■ ■         ■ ■•••       ••    ••                                     
+                                            •     ■ ■         ■ ■  •••    ••     •                                      
+                                           •      ■ ■         ■ ■    ••••••     ••                                      
+                                          •       ■ ■         ■ ■               •                                       
+                                         •        ■ ■■■■■■■■■■■ ■             •••                                       
+                                        •        ■              ■  •       ••••                                         
+                                        •      •■                ■ •••••••••                                            
+                                        •     •■                  ■•                                                    
+                                        •    • ■                   ■                                                    
+                                        •    • ■  ■ ■ ■■■ ■        ■                                                    
+                                        •    • ■  ■■■ ■■  ■   ■■   ■                                                    
+                                        •    • ■  ■ ■ ■■■ ■■■      ■                                                    
+                                        •    • ■                   ■                                                    
+                                        •    • ■   ■  ■■■ ■■■ ■■■  ■                                                    
+                                        •••••• ■  ■■■ ■■■  ■  ■■   ■                                                    
+                                         ••••  ■  ■ ■ ■ ■  ■  ■■■  ■                                                    
+                                               ■                   ■                                                    
+Heladero: "Buenas, ¿qué te sirvo?")" << endl << endl;
         cout << "1- Sabor " << opcion_normal << endl;
         cout << "2- Sabor " << opcion_alcohol << endl;
         cout << "3- Sabor " << opcion_raro << endl;
-        cout << "4- Más sabores\n\n";
+        cout << "4- Más sabores\n";
 
         enum opciones_de_sabor
         {
