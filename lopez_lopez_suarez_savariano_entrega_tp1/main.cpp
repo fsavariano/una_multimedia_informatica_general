@@ -192,7 +192,7 @@ El Heladero: "¿Qué te sirvo?")"
                 if (respuesta != "s" && respuesta != "S" && respuesta != "n" &&
                     respuesta != "N")
                 {
-                    cout << "Ey, hice una pregunta.\n";
+                    cout << "El Heladero: \"Ey, hice una pregunta.\"\n";
                 }
                 else if (respuesta == "s" || respuesta == "S")
                 {
@@ -207,26 +207,86 @@ El Heladero: "¿Qué te sirvo?")"
             }
             if (listo == true)
             { // el usuario está listo, entonces empiezo las preguntas
-                cout << "¿Qué edad tenés?\n";
+                cout << "El Heladero: \"¿Qué edad tenés?\"\n";
                 int edad;
                 cin >> edad;
                 if (edad < 18)
                 {
-                    cout << "Sos menor, mejor pedite otro sabor.\n\n";
+                    cout << "El Heladero: \"Sos menor, mejor pedite otro sabor.\"\n\n";
                     volver = true;
                 }
                 else
                 {
-                    while (no_respondio == true)
+                    bool respondio_bien = false;
+                    while (!respondio_bien)
                     {
-                        cout << "¿Te gustan los gatitos?\n";
+                        cout << "El Heladero: \"¿Te gustan los gatitos?\"\n";
                         cin >> respuesta;
-                        if (respuesta == "s")
-                            cout << "¿Tenes perros?\n";
-                        cout << "¿Te gusta el mate?\n";
-                        cout << "¿Mate amargo?\n";
-                        cout << "¿Sos de Boca?\n";
-                        cout << "¿De River?\n";
+                        if (respuesta != "s" && respuesta != "S")
+                        {
+                            respondio_bien = false;
+                        }
+                        if (respondio_bien)
+                        {
+                            cout << "El Heladero: \"¿Tenes perros?\"\n";
+                            cin >> respuesta;
+                            if (respuesta != "s" && respuesta != "S")
+                            {
+                                respondio_bien = false;
+                            }
+                        }
+                        if (respondio_bien)
+                        {
+                            cout << "El Heladero: \"¿Te gusta el mate?\"\n";
+                            cin >> respuesta;
+                            if (respuesta != "s" && respuesta != "S")
+                            {
+                                respondio_bien = false;
+                            }
+                        }
+                        if (respondio_bien)
+                        {
+                            cout << "El Heladero: \"¿Amargo?\"\n";
+                            cin >> respuesta;
+                            if (respuesta != "s" && respuesta != "S")
+                            {
+                                respondio_bien = false;
+                            }
+                        }
+                        if (respondio_bien)
+                        {
+                            cout << "El Heladero: \"¿Sos de Boca?\"\n";
+                            cin >> respuesta;
+                            if (respuesta != "s" && respuesta != "S")
+                            {
+                                respondio_bien = false;
+                            }
+                        }
+                        if (respondio_bien)
+                        {
+                            cout << "El Heladero: \"¿De River?\"\n";
+                            cin >> respuesta;
+                            if (respuesta != "s" && respuesta != "S")
+                            {
+                                respondio_bien = false;
+                            }
+                        }
+
+                        if (respondio_bien)
+                        {
+                            cout << "El Heladero: \"Genial, entonces sí, ¡un cucurucho de " << opcion_alcohol << "!\"\n";
+                            cout << "...\n"
+                                 << "... es un asco.\n"
+                                 << "El Heladero: \"Bueno, eso sería $" << precio * 100 << ".\"\n"
+                                 << "¿CUÁNTO?\n"
+                                 << "Evidentemente El Heladero puede ver el horror reflejado en tu cara.\n"
+                                 << "El Heladero: \"Y... es un alcohol de buena calidad, ¿qué esperabas?\n\n";
+                            // alguna imagen?
+                        }
+                        else
+                        {
+                            cout << "El Heladero: \"No, no, vamos de nuevo.\"\n";
+                        }
                     } // Hacer que mientras la respuenta sea S siga con el ciclo de preguntas
                     // sigue otra pregunta, sí es mayor
                 }
@@ -234,6 +294,8 @@ El Heladero: "¿Qué te sirvo?")"
             else
             { // el usuario no está listo
                 cout << "Entonces pedite otro sabor.\n";
+                cout << "Presioná Enter para volver a elegir...\n";
+                cin.ignore().get();//esto no funciona por alguna razón
                 volver = true;
             }
             break;
@@ -381,7 +443,7 @@ El Heladero: "¿Qué te sirvo?")"
 
     cout << "Gracias por jugar!\n"
          << "Apretá Enter para volver al menú...\n";
-    cin.ignore().get();
+    cin.ignore(1000, '\n');
 
     return;
 }
