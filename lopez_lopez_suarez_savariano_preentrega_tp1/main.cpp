@@ -38,7 +38,7 @@ void empezar_juego()
     bool volver;
     volver = true;
 
-    float precio = 0.0;
+    float precio = (generador_random() % 1000000) / 100;
 
     vector<string> sabores_normales = {"Frutilla", "Chocolate", "Vainilla"};
     vector<string> sabores_alcohol = {"Vino", "White Russian"};
@@ -145,9 +145,9 @@ void empezar_juego()
                     "tres. No preguntes.\""
                  << endl;
             volver = true;
-            opcion_normal = generador_random() % sabores_normales.size();
-            opcion_alcohol = generador_random() % sabores_alcohol.size();
-            opcion_raro = generador_random() % sabores_raros.size();
+            opcion_normal = sabores_normales[generador_random() % sabores_normales.size()];
+            opcion_alcohol = sabores_alcohol[generador_random() % sabores_alcohol.size()];
+            opcion_raro = sabores_raros[generador_random() % sabores_raros.size()];
             break;
         default:
             cout << "\nEl heladero te mira con cara extrañada.\n"
