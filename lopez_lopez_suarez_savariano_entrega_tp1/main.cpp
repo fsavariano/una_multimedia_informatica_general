@@ -177,8 +177,10 @@ El Heladero: "¿Qué te sirvo?")"
 ⠕⠕⠕⠕⠕⠕⠕⠕⠕⠕⠕⠕⠕⠕⠕⠕⠕⠕⠕⠕⠕⠕⠕⢠⣶⡎⠉⠉⠉⠙⢻⡮⣫⣫⣫⣫⣫⡿⠃⠕⠕⠕⠕⠕⠕⠕⠕⠕⠕⠕⠕⠕⠕⠕⠕⠕⠕⠕⠕⠕⠕⠕⠕⠕⠕⠕)"
                  << endl;
             cout << "El Heladero: \"...\"\n"
-                 << "El Heladero: \"...  el precio es de $" << precio << " igual.\"\n\n";
+                 << "El Heladero: \"...  el precio es de $" << precio << " igual.\"\n"
+                 << endl;
             break;
+
         case ALCOHOL:
             cout << "El Heladero: \"Ok, pero para ese sabor te voy a tener hacer un par de "
                     "preguntas. ¿Listo?\" (s/n)\n";
@@ -295,7 +297,7 @@ El Heladero: "¿Qué te sirvo?")"
             { // el usuario no está listo
                 cout << "Entonces pedite otro sabor.\n";
                 cout << "Presioná Enter para volver a elegir...\n";
-                cin.ignore().get();//esto no funciona por alguna razón
+                cin.ignore().get(); // esto no funciona por alguna razón
                 volver = true;
             }
             break;
@@ -345,7 +347,7 @@ El Heladero: "¿Qué te sirvo?")"
                  << "Revisás tus bolsillos. El celu y la SUBE siguen ahí: suspirás aliviado.\n"
                  << "Y al final el helado estaba rico así que... no salió tan mal, ¿no?\n"
                  << "Pero en uno encontrás algo más. Es un folletito de la heladería, y atrás dice \"NOS DEBÉS $" << precio << "\". Ah, bueh.\n"
-                 << "Te incorporás como podés , sacás tu celular y empezás a tipear furiosamente en las reseñas de la heladería.\n"
+                 << "Te incorporás como podés, sacás tu celular y empezás a tipear furiosamente en las reseñas de la heladería.\n"
                  << endl;
             break;
         case OTROS:
@@ -443,7 +445,9 @@ El Heladero: "¿Qué te sirvo?")"
 
     cout << "Gracias por jugar!\n"
          << "Apretá Enter para volver al menú...\n";
-    cin.ignore(1000, '\n');
+
+    cin.clear();
+    cin.ignore().get();
 
     return;
 }
