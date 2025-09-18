@@ -3,18 +3,19 @@
 ✓​ Uso variado de funciones de NCURSES
 ✓ Uso de CONSTANTES ENUMERADAS
 ✓ Uso de aleatoriedad con RANDOM
-●​ Uso del objeto STRING
-● Uso de ARREGLOS
-●​ Uso de VECTOR
+​✓ Uso del objeto STRING
+✓ Uso de ARREGLOS
+✓​​ Uso de VECTOR
 ✓​ Uso de FUNCIONES
 ✓ Uso de CLASES y OBJETOS (no es obligatorio)
-●​ El videojuego deberá tener un título
+✓ El videojuego deberá tener un título
 ●​ El juego, al perder o ganar, debe volver al menú principal para poder
 jugar nuevamente.
 */
 
 #include "Bocha.h"
 #include "Cucurucho.h"
+#include <array>
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
@@ -28,6 +29,7 @@ using namespace std;
 const int ANCHO = 120;
 const int ALTO = 40;
 const int DELAY = 30; // en ms
+const array<string, 7> SABORES = {"Frutilla", "Chocolate", "Vainilla", "Vino", "White Russian", "Trapo de Piso", "Hormiga, Damasco y Pimienta"};
 
 enum TECLAS
 {
@@ -42,6 +44,10 @@ enum TECLAS
 bool game_over;
 bool salir;
 int puntaje;
+int spawn_timer;
+int popup_timer;
+bool mostrar_sabor;
+int sabor;
 
 Cucurucho jugador;
 vector<Bocha> bochas;
@@ -52,13 +58,15 @@ void setup();
 void input();
 void update();
 void draw();
+void main_menu();
+void dibujar_pantalla_inicio();
 void gameover();
 void print_hud();
 
 int main()
 {
 
-    // setlocale(LC_ALL, "");   //capaz necesitemos esto
+    // setlocale(LC_ALL, ""); // capaz necesitemos esto
 
     srand(time(0)); // metemos semilla para rand
 
@@ -69,6 +77,7 @@ int main()
     keypad(stdscr, TRUE);  // uso de keypad. stdscr es un puntero a la ventana
     nodelay(stdscr, TRUE); //?? más falopa
 
+    noecho();
     if (LINES < ALTO || COLS < ANCHO) // copypasteado, previene jugar con dimensiones incorrectas
     {
         endwin(); //"sale" de ncurses
@@ -77,6 +86,8 @@ int main()
     }
 
     setup();
+
+    dibujar_pantalla_inicio();
 
     salir = false;
 
@@ -101,16 +112,16 @@ void setup()
 {
     game_over = FALSE; // por qué en mayúsculas?
 
-    puntaje = 0;
-
     jugador.setup();
 
     bochas.clear(); // limpia el vector
+    bochas.push_back(Bocha(rand() % 118 + 1, 2));
 
-    for (int i = 0; i < 5; i++)
-    {
-        bochas.push_back(Bocha(rand() % 119 + 1, 1)); //
-    }
+    puntaje = 0;
+    spawn_timer = 30 + rand() % 30;
+    popup_timer = 60;
+    mostrar_sabor = false;
+    sabor = rand() % 7;
 }
 
 void input() //
@@ -121,24 +132,17 @@ void input() //
     {
     case IZQ:
         if (jugador.get_x() > 1)
-            jugador.set_x(jugador.get_x() - 1);
+            jugador.set_x(jugador.get_x() - jugador.get_speed());
         break;
     case DER:
         if (jugador.get_x() < ANCHO - 6)
-            jugador.set_x(jugador.get_x() + 1);
+            jugador.set_x(jugador.get_x() + jugador.get_speed());
         break;
     case ESC: // apretar escape para terminar el juego
         game_over = TRUE;
         break;
-    case TURBO:                                  // tecla x
-        if (jugador.get_turbo_status() == false) // esto podría llamarse get_
-        {
-            jugador.turbo_on();
-        }
-        else
-        {
-            jugador.turbo_off();
-        }
+    case TURBO: // tecla x
+        jugador.set_turbo(!jugador.get_turbo_status());
         break;
     default:
         break;
@@ -157,13 +161,26 @@ void update() // gameplay
         }
     }
 
+    if (spawn_timer > 0)
+    {
+        spawn_timer--;
+    }
+    else
+    {
+        bochas.push_back(Bocha(rand() % 118 + 1, 2));
+        spawn_timer = 30 + rand() % 30;
+    }
+
     for (int i = 0; i < bochas.size(); i++)
     {
         bochas[i].update();
         if (jugador.hay_colision(bochas[i]))
         {
             puntaje++;
-            bochas.erase(bochas.begin() + i);
+            bochas.erase(bochas.begin() + i); // igual creo que siempre sería la primera...
+            sabor = rand() % 7;
+            mostrar_sabor = true;
+            popup_timer = 60;
         }
     }
 }
@@ -183,15 +200,43 @@ void draw() // gráficos
         bochas[i].draw();
     }
 
+    if (popup_timer > 0)
+    {
+        popup_timer--;
+        if (mostrar_sabor)
+        {
+            mvprintw(1, 1, "%s", (SABORES[sabor] + '!').c_str()); // finalmente :)
+        }
+    }
+    else
+    {
+        mostrar_sabor = false;
+    }
+
     refresh();
     delay_output(DELAY);
 }
 
 void print_hud()
 {
-    mvprintw(0, 5, "[ PUNTUACIÓN:    ]");
-    mvprintw(0, 15, "%d", puntaje);
-    mvprintw(0, 80, "[ TURBO: SÍ ]");
+    mvhline(2, 1, '~', 118);
+
+    int cifras_puntaje = to_string(puntaje).length(); // menos complicado que hacerlo con cuenta
+    mvprintw(1, 51, "[ PUNTUACION:     ]");
+    for (int i = 0; i < 4 - cifras_puntaje; i++)
+    {
+        mvaddch(1, 64 + i, '0');
+    }
+    mvprintw(1, 68 - cifras_puntaje, "%d", puntaje);
+    mvprintw(1, 100, "{ TURBO:      }");
+    if (jugador.get_turbo_status())
+    {
+        mvprintw(1, 110, "SI");
+    }
+    else
+    {
+        mvprintw(1, 110, "NO");
+    }
 }
 
 void gameover() // copio para tener un ejemplo por ahora
@@ -224,4 +269,60 @@ void gameover() // copio para tener un ejemplo por ahora
     {
         salir = TRUE;
     }
+}
+
+void dibujar_pantalla_inicio()
+{
+    vector<string> arte = {
+        R"(@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@)",
+        R"(@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@)",
+        R"(@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@)",
+        R"(@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@)",
+        R"(@@@@@@@@@@@@@@@@@%++%@@++%@*==+++*%@#*@@@@@@#++==*@@#==+=#@@@#+++=+++#%==++++#@@@@@@%+==#%@@@@@@%+-=#@@@@@@@@@@@@@@@@@@@)",
+        R"(@@@@@@@@@@@@@@@@@# .%@%  *@= -**##@@=:@@@@@@- == :%@+ .#*-.=@@##: -#%@* .**##%@@@@@*-+*+..%@@@@= -#*. #@@@@@@@@@@@@@@@@@)",
+        R"(@@@@@@@@@@@@@@@@@# :%@@. #@= +@@@@@@=:@@@@@%-.#% .%@+ :@@@: *@@@= =@@@* :@@@@@@@@@@@@@@%: %@@@@- +@@- *@@@@@@@@@@@@@@@@@)",
+        R"(@@@@@@@@@@@@@@@@@% :%@@. #@= +@@@@@@-:@@@@@%::%@..#@* -@@@: *@@@= =@@@* :@@@@@@@@@@@@@@%: %@@@@- +@@- *@@@@@@@@@@@@@@@@@)",
+        R"(@@@@@@@@@@@@@@@@@% .***. %@= -***#@@-:%@@@@%:-%@=.*@* -@@#:.#@@@+ +@@@* .***#@@@@@@@@@#+:-@@@@@- +@@- *@@@@@@@@@@@@@@@@@)",
+        R"(@@@@@@@@@@@@@@@@@@ :*#*: %@= -**#%@@::%@@@@#.-*#=.*@* :=-.=#@@@@+ *@@@* .**##@@@@@@%+-=*#@@@@@@- +@@- *@@@@@@@@@@@@@@@@@)",
+        R"(@@@@@@@@@@@@@@@@@@ -@@@- @@= +@@@@@@..#@@@@# -+++ +@# =@+ +@@@@@* #@@@* .@@@@@@@@@@+ =@@@@@@@@@- +@@- *@@@@@@@@@@@@@@@@@)",
+        R"(@@@@@@@@@@@@@@@@@@.-@@@-.@@= =@@@@@@..#@@@@*.#@@@:=@% +@@-:@@@@@* #@@@# :@@@@@@@@@@= =@@@@@@@@@- +@@- *@@@@@@@@@@@@@@@@@)",
+        R"(@@@@@@@@@@@@@@@@@@:=@@@=.@@= =%%@%@@ .*%%%@+:%@@@=-@% *@@#:*@@@@* %@@@* .%%%%@@@@@@= =%%%%@@*#@= =%%: *@@@@@@@@@@%#@@%%@)",
+        R"(@@@@@@@@@@@@@@@@@@=+@@@+-@@+:-++**@@::-+++**+@@@@*=@@-#@@@*+@@@@#:@@@@#::=+++#@@@@@*.-+++*%%=*@#=-==-+%@@@@@@@@%##@@%%@@)",
+        R"(@@@@@@@@@@@@@@@@@@%@@@@%%@@%%#%%%%@@###%%%%%%@@@@@%@@%@@@@@%@@@@@%@@@@@#%#%%%@@@@@@%#%#%%%@@%@@@@%##%@@@@@@%@@%*%@@%%@@@)",
+        R"(@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%%@@#*%%%#@@@@@)",
+        R"(@#%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@##@@##@%##@@@@@@)",
+        R"(@@#%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%#%@@*#@@##@@@@@@@)",
+        R"(@@@%%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@##%%@#%@%#%@%@@@@@@)",
+        R"(@@@@@@%%@@@%##@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#+=--=%@%##%%%@@@@@@)",
+        R"(@@%@@%%%%@@@#**%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@+:.    +@##%##@@@@@@@)",
+        R"(@@%#%@%#%##@@@*=#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@+.      -%#%*%@@@@@@@@)",
+        R"(@@@%+#@@%@*+@*#%-+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#.       =@%+%@@@@@@@@@)",
+        R"(@@@@@*=#%%@#*%*#%*=%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@=       .#**@@@@@@@@@@@)",
+        R"(@@@@@@%**%@@@#%##@#-+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@:       -*#@@@@@@@@@@@@)",
+        R"(@@@@@@@@%*#@@@%@@+:. .-+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%-      -*%@@@@@@@@@@@@@)",
+        R"(@@@@@@@@@@%*%@@%=.      -#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%*-   -*%@@@@@@@@@@@@@@@)",
+        R"(@@@@@@%%@@@*%@=.        :*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@####%@@@@@@@@@@@@@@@@@@@)",
+        R"(@@@@@@@@@%*@@@%#:          :#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@)",
+        R"(@@@@@@@@@#*%@@%-.          -@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@)",
+        R"(@@@@@@@@@@%+*@@*+.         .#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@)",
+        R"(@@@@@@@@@@@@%**%##+:         +@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@)",
+        R"(@@@@@@@@@@@@@#+#*==.        =@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@)",
+        R"(@@@@@@@@@@@@@@%+#: :.       =@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@)",
+        R"(@@@@@@@@@@@@@@@%*#::*.     -*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@)",
+        R"(@@@@@@@@@@@@@@@@@%%+*+-. .=*%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@)",
+        R"(@@@@@@@@@@@@@@@@@@@@%##=-+#%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@)",
+        R"(@@@@@@@@@@@@@@@@@@@@@@@%%@@@@@@@@@@@@@@@@"APRETA ENTER DOS VECES PARA EMPEZAR"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@)",
+        R"(@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@)",
+        R"(@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@(no preguntes por que dos veces)@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@)",
+        R"(@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@)",
+        R"(@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@)",
+        R"(@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@)"};
+
+    // dibuja el ASCII en pantalla
+    for (int i = 0; i < (int)arte.size(); i++)
+    {
+        mvprintw(i, 0, "%s", arte[i].c_str());
+    }
+    refresh(); // muestra en pantalla
+    getch();   // espera una tecla
 }
