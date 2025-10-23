@@ -323,6 +323,8 @@ void dibujar_pantalla_inicio()
     {
         mvprintw(i, 0, "%s", arte[i].c_str());
     }
-    refresh(); // muestra en pantalla
-    getch();   // espera una tecla
+
+    refresh();  // muestra en pantalla
+    flushinp(); // limpia buffer de teclas
+    getch();    // espera una tecla
 }
