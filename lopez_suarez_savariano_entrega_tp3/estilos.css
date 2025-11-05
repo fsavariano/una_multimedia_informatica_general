@@ -10,6 +10,14 @@
     src: url("Inter-VariableFont_opsz,wght.ttf") format("truetype");
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #000000;
+    color: whitesmoke
+        /* para deshacerse de márgenes default */
+}
 
 body {
     font-family: "Rubik Iso", serif;
@@ -19,40 +27,80 @@ footer {
     font-family: sans-serif;
 }
 
+h1 {
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+    color: #f5f5f5;
+}
+
 .navbar {
     display: flex;
     justify-content: space-around;
     /* espaciado equitativo */
     align-items: center;
-    background-color: #134b87;
-    padding: 0.2rem;
+    background-color: #6b6b6b;
+    padding: 0rem 2rem;
     font-family: "Inter", serif;
 }
 
-.nav-lista {
+.navbar ul {
     display: flex;
     justify-content: space-around;
     /* espaciado equitativo */
     align-items: center;
     list-style-type: none;
     /* saca los bullets */
+    background-color: #6b6b6b;
+    margin: 0;
+    /* make sure browser default margins don't shift layout */
+    padding: 0;
+    width: 100%;
 }
 
-.nav-boton {
+.navbar li {
     display: flex;
     flex-direction: column;
     /* por los icons */
     align-items: center;
-    color: white;
-    text-decoration: none;
-    /* si no aparece subrayado */
     padding: 0.6rem 1rem;
-    border-radius: 0.0rem;
+    border-radius: 0.2rem;
     /* esto lo redondea o no, en 0 */
+    background-color: #6b6b6b;
     transition: background-color 0.3s;
 }
 
-/* Hover effect */
-.nav-boton:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+.navbar a {
+    color: whitesmoke;
+    text-decoration: none;
+    position: relative;
+    padding: 0.5rem 0;
+    background-color: #6b6b6b;
+}
+
+/* animación del portfolio de la clase */
+.navbar li a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 100%;
+    height: 2px;
+    background-color: #f5f5f5;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+    transform-origin: right;
+}
+
+.banner {
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+}
+
+footer {
+    width: 100%;
+    height: 220px;
+    /* esto lo va a fijar... */
 }
