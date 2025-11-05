@@ -104,3 +104,32 @@ footer {
     height: 220px;
     /* esto lo va a fijar... */
 }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);/*dos filas*/
+  gap : 10px;/*espacio entre cada imagen*/
+  padding: 10px;
+  max-width: 1200px;/*nunca se vuelve mas ancho que esta medida*/
+  margin: auto;/*centra automatica la galeria*/
+}
+
+.gallery img {
+  width: 100%; /*  la imagen se adapta automáticamente a 
+  la columna */
+  cursor: pointer;/*cursor sobre la imagen*/
+  transition: .2s ease;/*tipo de zoom que hace*/
+  border-radius: 10px;/*borde de las imagenes*/
+  transform-origin: center center;
+}
+
+img:hover{
+  transform: scale(1.32);/*zoom minimo*/
+}
+
