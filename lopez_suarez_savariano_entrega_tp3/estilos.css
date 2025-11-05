@@ -1,0 +1,58 @@
+/* arrancar armando la navegación, hay que terminar de decidir el diseño (no scroll, single page sí o no...) */
+
+@font-face {
+    font-family: "Rubik Iso";
+    src: url("./fonts/Rubik_Iso/RubikIso-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Inter";
+    src: url("Inter-VariableFont_opsz,wght.ttf") format("truetype");
+}
+
+
+body {
+    font-family: "Rubik Iso", serif;
+}
+
+footer {
+    font-family: sans-serif;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    /* espaciado equitativo */
+    align-items: center;
+    background-color: #134b87;
+    padding: 0.2rem;
+    font-family: "Inter", serif;
+}
+
+.nav-lista {
+    display: flex;
+    justify-content: space-around;
+    /* espaciado equitativo */
+    align-items: center;
+    list-style-type: none;
+    /* saca los bullets */
+}
+
+.nav-boton {
+    display: flex;
+    flex-direction: column;
+    /* por los icons */
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    /* si no aparece subrayado */
+    padding: 0.6rem 1rem;
+    border-radius: 0.0rem;
+    /* esto lo redondea o no, en 0 */
+    transition: background-color 0.3s;
+}
+
+/* Hover effect */
+.nav-boton:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
