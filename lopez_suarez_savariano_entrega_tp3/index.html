@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Porfolio Artistas multimediales</title>
+    <title>Portfolio Multimedia</title>
     <link rel="stylesheet" href="estilos.css">
 </head>
 
@@ -12,22 +12,30 @@
     <header>
         <nav class="navbar">
             <ul class="nav-lista">
-                <li class="nav-boton"><a href="about.html">Acerca de nosotros</a></li>
-                <li class="nav-boton"><a href="index.html">Artistas</a></li>
-                <li class="nav-boton"><a href="helarte.html">Proyectos</a></li>
-                <li class="nav-boton"><a href="index.html">Contáctanos</a></li>
+                <li class="nav-boton"><a href="#" onclick="volver()">Inicio</a></li>
+                <li class="nav-boton"><a href="index.html">Artistas</a>
+                    <ul>
+                        <li><a href="#" onclick="mostrar('savariano')">Francisco Savariano</a></li>
+                        <li><a href="#" onclick="mostrar('lopez')">Brenda Lopez</a></li>
+                        <li><a href="#" onclick="mostrar('suarez')">Candela Suarez</a></li>
+                    </ul>
+                </li>
+                <li class="nav-boton"><a href="#" onclick="mostrar('helarte')">Proyectos</a></li>
+                <li class="nav-boton"><a href="#" onclick="mostrar('contacto')">Contactanos</a></li>
             </ul>
         </nav>
         <img src="img/vera-molnar-banner.jpg" alt="Banner: Est-ce Une Ligne?, de Vera Molnár" class="banner">
         <h1>GRUPO HELARTE</h1>
-
-        <p id="mensaje-enviado" style="color: green; font-weight: bold;"></p>
     </header>
     <main>
         <aside>
             <ul>
                 <li>
-                    <h2><a href="#" onclick="mostrar('savariano')">Francisco Savariano</a></h2>
+                    <h2>
+                        <a href="#" onclick="mostrar('savariano')"><img src="img/choriflan.jpg"
+                                alt="Foto: Francisco Savariano" width="100">
+                        </a>
+                    </h2>
                 </li>
                 <li>
                     <h2><a href="#" onclick="mostrar('lopez')">Brenda Lopez</a></h2>
@@ -38,78 +46,127 @@
                 <li>
                     <h2><a href="#" onclick="mostrar('helarte')">Helarte</a></h2>
                 </li>
+                <li>
+                    <h2><a href="#" onclick="mostrar('contacto')">Contacto</a></h2>
+                </li>
             </ul>
         </aside>
-        <section id="savariano" class="contenido" style="display:none;">
-            <article>
-                <h3>Francisco Savariano</h3>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim voluptas deleniti eius harum quasi eum
-                    perspiciatis? Nulla nesciunt adipisci, reiciendis magni eligendi beatae aspernatur deleniti at
-                    voluptate magnam accusamus quos?</p>
+
+        <section class="artistas">
+            <article id="savariano" class="contenido">
+                <div class="info-artista">
+                    <img src="img/choriflan.jpg" alt="Foto: Francisco Savariano">
+                    <div class="texto-artista">
+                        <h2>Francisco Savariano</h2>
+                        <h3><i>Game developer</i>, artista multimedial</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus.
+                            Suspendisse potenti. </p>
+                    </div>
+                </div>
+
+                <div class="carrusel">
+                    <button class="atras">◀</button>
+
+                    <div class="img-contenedor imagenes"></div>
+
+                    <button class="adelante">▶</button>
+                </div>
+
+                <div class="puntos"></div>
             </article>
-            <div>
-                <img src="IMAGENES/carte_una.png" alt="">
-                <img src="img/1.jpeg" alt="">
-                <img src="IMAGENES/tp1.jpeg" alt="">
-                <img src="IMAGENES/tp2.jpeg" alt="">
-            </div>
-            <button onclick="volver()">Volver al inicio</button>
+
+            <article id="lopez" class="contenido">
+                <h2>Artista 2</h2>
+                <h3>Diseñadora gráfica, artista multimedial</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus. Suspendisse
+                    potenti.</p>
+                <!-- <div class="gallery">
+                    <img src="img/1.jpeg" alt="Obra 1" width="500">
+                    <img src="img/2.jpeg" alt="Obra 2" width="500">
+                    <img src="img/3.jpeg" alt="Obra 3" width="500">
+                    <img src="img/4.jpeg" alt="Obra 4" width="500">
+                    <button onclick="volver()">Volver al inicio</button> -->
+                <!-- </div> -->
+
+                <div class="carrusel">
+                    <button class="atras">◀</button>
+
+                    <div class="img-contenedor imagenes"></div>
+
+                    <button class="adelante">▶</button>
+                </div>
+
+                <div class="puntos"></div>
+            </article>
+
+            <article id="suarez" class="contenido">
+                <h2>Cande Suárez</h2>
+                <h3>Productora, artista multimedial</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus. Suspendisse
+                    potenti.</p>
+                <!-- <div class="gallery">
+                    <img src="img/1.jpeg" alt="Obra 1" width="500">
+                    <img src="img/2.jpeg" alt="Obra 2" width="500">
+                    <img src="img/3.jpeg" alt="Obra 3" width="500">
+                    <img src="img/4.jpeg" alt="Obra 4" width="500">
+                    <button onclick="volver()">Volver al inicio</button> -->
+                <!-- </div> -->
+
+                <div class="carrusel">
+                    <button class="atras">◀</button>
+
+                    <div class="img-contenedor imagenes"></div>
+
+                    <button class="adelante">▶</button>
+                </div>
+
+                <div class="puntos"></div>
+            </article>
         </section>
 
-        <section id="lopez" class="contenido" style="display:none;">
-            <article>
-                <h3>Brenda Lopez</h3>
-                <p>Se encuentra actualmente cursando la carrera de Artes Multimediales en la Universidad Nacional de las
-                    Artes.
-                    Nulla nesciunt adipisci, reiciendis magni eligendi beatae aspernatur deleniti at voluptate magnam
-                    accusamus quos?</p>
-
-            </article>
-            <div>
-                <img src="img/carte_una.png" alt="">
-                <img src="IMAGENES/tp.jpeg" alt="">
-                <img src="IMAGENES/tp1.jpeg" alt="">
-                <img src="IMAGENES/tp2.jpeg" alt="">
-            </div>
-            <button onclick="volver()">Volver al inicio</button>
-        </section>
-
-        <section id="suarez" class="contenido" style="display:none;">
-            <article>
-                <h3>Candela Suarez Martinez</h3>
-                <p>Se encuentra actualmente cursando la carrera de Artes Multimediales en la Universidad Nacional de las
-                    Artes.
-                    Participa en proyectos audiovisuales independientes desempeñando roles en el área de Producción y
-                    Dirección.
-                </p>
-            </article>
-            <div>
-                <img src="img/1.jpeg" alt="Foto 1">
-                <img src="img/2.jpeg" alt="Foto 2">
-                <img src="img/3.jpeg" alt="Foto 3">
-                <img src="img/4.jpeg" alt="Foto 4">
-                <img src="img/5.jpeg" alt="Foto 5">
-            </div>
-            <button onclick="volver()">Volver al inicio</button>
-        </section>
-
-        <section id="helarte" class="contenido" style="display:none;">
+        <section id="helarte" class="contenido">
             <h3>¿Qué es?</h3>
             <p>"Helarte" es una Aventura Conversacional desarrollada como un proyecto artístico multimedial para la
                 cátedra de Informática General (Prof. Juan José María Tirigall). Es una obra satírica que explora la
                 fusión del arte y el helado como una experiencia sensorial a través de la ficción interactiva.</p>
-            <div>
+            <!-- <div class="gallery">
                 <img src="" alt="">
                 <img src="" alt="">
                 <img src="" alt="">
-                <img src="" alt="">
+                <img src="" alt=""> -->
+            <!-- </div> -->
+
+            <div class="carrusel">
+                <button class="atras">◀</button>
+                <div class="img-contenedor imagenes"></div>
+                <button class="adelante">▶</button>
             </div>
+
+            <div class="puntos"></div>
+
             <button onclick="volver()">Volver al inicio</button>
         </section>
+
+        <section id="contacto" class="contenido">
+            <form id="form-contacto" action="/registrardatos.php" method="post">
+                <h4>Envianos un mensaje</h4>
+                <label>Ingrese su nombre completo:</label><br>
+                <input type="text" name="nombre" size="20"><br>
+
+                <label>Ingrese su correo electrónico:</label><br>
+                <input type="mail" name="mail" size="20"><br>
+
+                <input type="submit" value="Enviar">
+                <input type="reset" value="Borrar">
+
+                <p id="mensaje-enviado"></p>
+            </form>
+        </section>
+
     </main>
 
     <footer>
-        <li>
+        <!-- <li>
             <h3>Contacto</h3>
         </li>
         <ul>
@@ -135,19 +192,9 @@
                 <li>Tel:<a href="tel:+5491168280735">1168280735</a></li>
                 <li>Mail:<a href="mailto:suarezmartinezcandela@gmail.com">suarezmartinezcandela@gmail.com</a></li>
             </ul>
-        </ul>
+        </ul> -->
     </footer>
-    <form id="form-contacto" action="/registrardatos.php" method="post">
-        <h4>Envíanos un mensaje</h4>
-        <label>Ingrese su nombre completo:</label><br>
-        <input type="text" name="nombre" size="20"><br>
 
-        <label>Ingrese su correo electrónico:</label><br>
-        <input type="mail" name="mail" size="20"><br>
-
-        <input type="submit" value="Enviar">
-        <input type="reset" value="Borrar">
-    </form>
     <script src="script.js"></script>
 </body>
 
