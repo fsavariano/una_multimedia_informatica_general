@@ -1,0 +1,296 @@
+/* arrancar armando la navegación, hay que terminar de decidir el diseño (no scroll, single page sí o no...) */
+
+@font-face {
+    font-family: "Rubik Iso";
+    src: url("./fonts/Rubik_Iso/RubikIso-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Inter";
+    src: url("Inter-VariableFont_opsz,wght.ttf") format("truetype");
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #000000;
+    color: whitesmoke
+        /* para deshacerse de márgenes default */
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    width: 100vw;
+    height: 100vh;
+    background-color: #db7dc7;
+    /*color de fondo*/
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 70px;
+    overflow: hidden;
+}
+
+.carrusel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    width: 100%;
+    height: 100vh;
+}
+
+.imagenes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+}
+
+.img {
+    box-shadow: 0px 4px 10px 0px color(0, 0, 0, 0.85);
+    height: 576px;
+    width: 1134px;
+    border-radius: 15px;
+    margin: 5px;
+    object-fit: cover;
+}
+
+.text {
+    overflow: hidden;
+    position: absolute;
+    flex-direction: column;
+    transform: translateY(0px);
+    margin-bottom: 9px;
+    backdrop-filter: blur(20px);
+    background-color: rgba(63, 106, 138, 0.21);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+}
+
+.texto h3 {
+    text-shadow: 0px 0px 15px black;
+    padding-top: 40px;
+    color: white;
+    font-weight: 300;
+    font-size: 27px;
+}
+
+.texto p {
+    align-items: center;
+    padding: 20px;
+    color: white;
+    font-size: 0px;
+    font-weight: 300;
+}
+
+.imagenes .texto {
+    width: 600px;
+    height: 100px;
+    transition: 1s;
+}
+
+.imagenes:hover .texto {
+    transition: height 1s, transform 1s, background-color 1s;
+    transform: translateY(-150px);
+    height: 300px;
+    background-color: rgba(63, 106, 138, 0.71);
+}
+
+.imagenes:hover .texto p {
+    transition: font-size 0s .2s linear;
+    font-size: 23px;
+    font-weight: 300;
+    text-shadow: 0px 0px 10px #000000;
+}
+
+.puntos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.puntos p {
+    font-size: 100px;
+    font-weight: 500;
+    margin-top: -50px;
+    color: black;
+}
+
+.puntos .bold {
+    font-weight: 700;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: #5e17eb;
+}
+
+footer {
+    font-family: sans-serif;
+}
+
+h1 {
+    font-family: "Rubik Iso", serif;
+    text-align: center;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+    color: #f5f5f5;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    /* espaciado equitativo */
+    align-items: center;
+    background-color: #101010;
+    padding: 0rem 2rem;
+    font-family: "Inter", serif;
+    animation-name: color;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    /* sigue indeterminadamente */
+    animation-timing-function: ease-in-out;
+
+
+
+}
+
+@keyframes color {
+    0% {
+        background-color: #101010;
+    }
+
+    50% {
+        background-color: #353535;
+    }
+
+    100% {
+        background-color: #101010;
+    }
+}
+
+.navbar ul {
+    display: flex;
+    justify-content: space-around;
+    /* espaciado equitativo */
+    align-items: center;
+    list-style-type: none;
+    /* saca los bullets */
+    background-color: #ffffff00;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.navbar li {
+    display: flex;
+    flex-direction: column;
+    /* por los icons */
+    align-items: center;
+    padding: 0.6rem 1rem;
+    border-radius: 0.2rem;
+    /* esto lo redondea o no, en 0 */
+    background-color: #272727b2;
+    transition: background-color 0.3s;
+}
+
+.navbar a {
+    color: whitesmoke;
+    text-decoration: none;
+    position: relative;
+    padding: 0.5rem 0.2rem;
+    background-color: #ffffff00;
+}
+
+/* animación del portfolio de la clase */
+/* .navbar li a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 100%;
+    height: 2px;
+    background-color: #f5f5f5;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+    transform-origin: right;
+} */
+
+.banner {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+}
+
+footer {
+    width: 100%;
+    height: 220px;
+    /* esto lo va a fijar... */
+}
+
+.artistas {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.contenido {
+    text-align: left;
+    display: none;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 2rem;
+    color: pink;
+}
+
+.contenido img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 0.2rem;
+}
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.gallery img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+}
+
+.info-artista {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 1rem;
+}
+
+.info-artista img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 0.3rem;
+    flex-shrink: 0;
+    /* esto evita que se romopa*/
+}
+
+.texto-artista {
+    flex: 1;
+    /* text uses remaining width */
+}
+
+#contacto {
+    color: green;
+    font-weight: bold;
+}

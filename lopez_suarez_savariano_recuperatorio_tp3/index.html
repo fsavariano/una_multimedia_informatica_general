@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Portfolio Multimedia</title>
+	<link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+
+	<header>
+		<nav class="navbar">
+			<ul class="nav-lista">
+				<li class="nav-boton"><a href="#" onclick="volver()">Inicio</a></li>
+
+				<li class="nav-boton">
+					<a href="#">Artistas</a>
+					<ul class="nav-sublista">
+						<li><a href="#" onclick="mostrar('savariano')">Francisco Savariano</a></li>
+						<li><a href="#" onclick="mostrar('lopez')">Brenda Lopez</a></li>
+						<li><a href="#" onclick="mostrar('suarez')">Candela Suarez</a></li>
+					</ul>
+				</li>
+
+				<li class="nav-boton"><a href="#" onclick="mostrar('helarte')">Proyectos</a></li>
+				<li class="nav-boton"><a href="#" onclick="mostrar('contacto')">Contactanos</a></li>
+			</ul>
+		</nav>
+
+		<img src="img/vera-molnar-banner.jpg" alt="Banner: Est-ce Une Ligne?, de Vera Molnár" class="banner">
+
+		<h1>GRUPO HELARTE</h1>
+	</header>
+
+	<main>
+
+		<aside>
+			<ul>
+				<li>
+					<a href="#" onclick="mostrar('savariano')">
+						<img src="img/fran.jpeg" alt="Descripción de imagen" width="100">
+					</a>
+				</li>
+				<li><a href="#" onclick="mostrar('lopez')">Brenda Lopez</a></li>
+				<li><a href="#" onclick="mostrar('suarez')">Candela Suarez</a></li>
+				<li><a href="#" onclick="mostrar('helarte')">Helarte</a></li>
+				<li><a href="#" onclick="mostrar('contacto')">Contacto</a></li>
+			</ul>
+		</aside>
+
+		<section class="artistas">
+
+			<article id="savariano" class="contenido">
+				<div class="info-artista">
+					<img src="img/fran.jpeg" alt="Descripción de imagen">
+					<div class="texto-artista">
+						<h2>Francisco Savariano</h2>
+						<h3><i>Game developer</i>, artista multimedial</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+					</div>
+				</div>
+
+				<div class="carrusel">
+					<button class="atras">◀</button>
+					<div class="img-contenedor imagenes"></div>
+					<button class="adelante">▶</button>
+				</div>
+
+				<div class="puntos"></div>
+			</article>
+
+			<article id="lopez" class="contenido">
+				<h2>Brenda Lopez</h2>
+				<h3>Diseñadora gráfica, artista multimedial</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+
+				<div class="carrusel">
+					<button class="atras">◀</button>
+					<div class="img-contenedor imagenes"></div>
+					<button class="adelante">▶</button>
+				</div>
+
+				<div class="puntos"></div>
+			</article>
+
+			<article id="suarez" class="contenido">
+				<h2>Candela Suarez</h2>
+				<h3>Productora, artista multimedial</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+
+				<div class="carrusel">
+					<button class="atras">◀</button>
+					<div class="img-contenedor imagenes"></div>
+					<button class="adelante">▶</button>
+				</div>
+
+				<div class="puntos"></div>
+			</article>
+
+		</section>
+
+		<section id="helarte" class="contenido">
+			<h3>¿Qué es?</h3>
+			<p>"Helarte" es una Aventura Conversacional desarrollada como proyecto artístico multimedial.</p>
+
+			<div class="carrusel">
+				<button class="atras">◀</button>
+				<div class="img-contenedor imagenes"></div>
+				<button class="adelante">▶</button>
+			</div>
+
+			<div class="puntos"></div>
+
+			<button onclick="volver()">Volver al inicio</button>
+		</section>
+
+		<section id="contacto" class="contenido">
+			<form id="form-contacto" action="/registrardatos.php" method="post">
+				<h4>Envianos un mensaje</h4>
+
+				<label>Nombre completo:</label><br>
+				<input type="text" name="nombre"><br>
+
+				<label>Correo electrónico:</label><br>
+				<input type="email" name="mail"><br>
+
+				<input type="submit" value="Enviar">
+				<input type="reset" value="Borrar">
+
+				<p id="mensaje-enviado"></p>
+			</form>
+		</section>
+
+	</main>
+
+	<footer>
+		<!--
+		<li>
+			<h3>Contacto</h3>
+		</li>
+		<ul>
+			<li>
+				<h4>Francisco Savariano</h4>
+			</li>
+		...
+		-->
+	</footer>
+
+	<script src="script.js"></script>
+
+</body>
+</html>
