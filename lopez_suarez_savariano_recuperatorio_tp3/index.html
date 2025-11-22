@@ -22,147 +22,164 @@
                         <li><a href="#" onclick="mostrar('suarez')">Candela Suarez</a></li>
                     </ul>
                 </li>
-                <!-- <li class="nav-boton"><a href="#" onclick="mostrar('helarte')">Proyectos</a></li> -->
                 <li class="nav-boton"><a href="#" onclick="mostrar('contacto')">Contactanos</a></li>
             </ul>
         </nav>
 
         <img src="img/banner-multi.jpg" alt="Descripción de imagen" class="banner">
 
-        <h1 class="titulo"><b>GRUPO HELARTE</b></h1>
-        <!-- la b igual es semántica nomás -->
+        <h1 class="titulo"><strong>GRUPO HELARTE</strong></h1>
+        <!--strong igual es semántica nomás -->
     </header>
 
     <main>
 
         <div class="artistas-container">
             <a href="#" onclick="mostrar('lopez')">
-                <div id="artista-lopez"></div>
+                <div id="artista-lopez">B</div>
             </a>
             <a href="#" onclick="mostrar('savariano')">
-                <div id="artista-savariano"></div>
+                <div id="artista-savariano">F</div>
             </a>
             <a href="#" onclick="mostrar('suarez')">
-                <div id="artista-suarez"></div>
+                <div id="artista-suarez">C</div>
             </a>
-            <!-- <a href="#" onclick="mostrar('savariano')">
-                <img src="img/fran.jpeg" alt="Descripción de imagen" width="456" height="572">
-            </a> -->
         </div>
-
 
         <article id="lopez" class="contenido">
             <h2>Brenda Lopez</h2>
-            <h3>Diseñadora gráfica, artista multimedial</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <h3>Actriz, diseñadora gráfica y artista multimedial</h3>
+            <p>Artista multimedial cuya obra combina diseño gráfico, collage, fotografía y puesta en escena. <br>Su
+                trabajo explora la tensión entre lo cotidiano y lo imaginario, articulando imágenes poéticas, síntesis
+                visuales y elementos performáticos. A partir de una mirada influenciada por su formación en artes
+                dramáticas, crea composiciones donde conviven figuras humanas, objetos simbólicos y espacios
+                intervenidos. Su producción abarca desde collages conceptuales y piezas digitales hasta registros
+                documentales y procesos de taller, construyendo narrativas visuales que reflexionan sobre la
+                introspección, el trabajo, la identidad y la relación entre cuerpo y entorno.</p>
+            <div>
+                <div class="gallery">
 
-            <div class="gallery">
-                <p>
-                    <a href="img/ftbren/6.jpg">
-                        <img src="img/ftbren/6.jpg" alt="ft1">
-                    </a>
-                    <a href="img/ftbren/7.jpg">
-                        <img src="img/ftbren/7.jpg" alt="ft2">
-                    </a>
-                </p>
-                <p>
-                    <a href="img/ftbren/8.jpg">
-                        <img src="img/ftbren/8.jpg" alt="ft3">
-                    </a>
-                    <a href="img/ftbren/9.jpg">
-                        <img src="img/ftbren/9.jpg" alt="ft4">
-                    </a>
-                </p>
-                <button class="atras">◀</button>
-                <button class="adelante">▶</button>
-            </div>
+                    <div class="imagenes">
+                        <img src="img/ftbren/6.jpg" alt="ft1" onclick="abrirImagen('img/ftbren/6.jpg')">
+                        <aside>
+                            <p>"Caos"</p>
+                        </aside>
+                    </div>
 
-            <div class="puntos"></div>
+                    <div class="imagenes">
+                        <img src="img/ftbren/7.jpg" alt="ft2" onclick="abrirImagen('img/ftbren/7.jpg')">
+                        <aside>
+                            <p>"Margaritas"</p>
+                        </aside>
+                    </div>
+
+                    <div class="imagenes">
+                        <img src="img/ftbren/8.jpg" alt="ft3" onclick="abrirImagen('img/ftbren/8.jpg')">
+                        <aside>
+                            <p>Producción de Stop Motion</p>
+                        </aside>
+                    </div>
+
+                    <div class="imagenes">
+                        <img src="img/ftbren/9.jpg" alt="ft4" onclick="abrirImagen('img/ftbren/9.jpg')">
+                        <aside>
+                            <p>Producción audiovisual de K&S films</p>
+                        </aside>
+                    </div>
+
+                </div>
         </article>
 
         <article id="savariano" class="contenido">
-            <div class="info-artista">
+            <div>
                 <div class="texto-artista">
                     <h2>Francisco Savariano</h2>
                     <h3><i>Game developer</i>, artista multimedial</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <p>Artista multimedial especializado en el desarrollo de videojuegos, con un estilo visual vibrante
+                        y cargado de personalidad. <br>Combina ilustración digital, diseño de personajes y narrativa
+                        interactiva para crear mundos lúdicos y memorables. <br>Sus proyectos se caracterizan por un humor
+                        distintivo, estéticas caricaturescas y un fuerte enfoque en el storytelling visual. Con
+                        experiencia en la creación de arte conceptual, interfaces y elementos gráficos animados, busca
+                        expandir universos propios a través del juego, la creatividad y la experimentación.</p>
                 </div>
             </div>
 
             <div class="gallery">
-                <p>
-                    <a href="img/ftfran/+UnFoR.png">
-                        <img src="img/ftfran/+UnFoR.png" alt="ft1">
-                    </a>
-                    <a href="img/ftfran/8_EHXE.png">
-                        <img src="img/ftfran/8_EHXE.png" alt="ft2">
-                    </a>
-                </p>
-                <p>
-                    <a href="img/ftfran/wqI5TS.png">
-                        <img src="img/ftfran/wqI5TS.png" alt="ft3">
-                    </a>
-                    <a href="img/ftfran/zqBu_J.png">
-                        <img src="img/ftfran/zqBu_J.png" alt="ft4">
-                    </a>
-                </p>
-                <button class="atras">◀</button>
-                <button class="adelante">▶</button>
+
+                <div class="imagenes">
+                    <img src="img/ftfran/+UnFoR.jpg" alt="ft1" onclick="abrirImagen('img/ftfran/+UnFoR.jpg')">
+                    <aside>
+                        <p>"El funeral del payaso Wang Paseca"</p>
+                    </aside>
+                </div>
+
+                <div class="imagenes">
+                    <img src="img/ftfran/8_EHXE.jpg" alt="ft2" onclick="abrirImagen('img/ftfran/8_EHXE.jpg')">
+                    <aside>
+                        <p>"Barbuja, el bardo granuja"</p>
+                    </aside>
+                </div>
+
+                <div class="imagenes">
+                    <img src="img/ftfran/wqI5TS.jpg" alt="ft3" onclick="abrirImagen('img/ftfran/wqI5TS.jpg')">
+                    <aside>
+                        <p>"Chiquito"</p>
+                    </aside>
+                </div>
+
+                <div class="imagenes">
+                    <img src="img/ftfran/zqBu_J.jpg" alt="ft4" onclick="abrirImagen('img/ftfran/zqBu_J.jpg')">
+                    <aside>
+                        <p>"Our House"</p>
+                    </aside>
+                </div>
+
             </div>
 
-            <div class="puntos"></div>
         </article>
 
         <article id="suarez" class="contenido">
             <h2>Candela Suarez</h2>
-            <h3>Productora, artista multimedial</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <h3>Actriz, productora y artista multimedial</h3>
+            <p>Artista multimedial en formación, con experiencia en producción audiovisual, doblaje y proyectos
+                independientes. <br>Su enfoque combina creatividad, narración visual y trabajo colaborativo. Ha
+                participado en producciones teatrales, cortometrajes y tareas de comunicación visual, desarrollando
+                habilidades en edición, gestión de proyectos y sonido. Con una formación diversa en artes multimedia,
+                psicodrama teatral y técnicas de voz, busca seguir explorando lenguajes expresivos y aportar
+                versatilidad en entornos creativos y dinámicos.</p>
 
             <div class="gallery">
-                <p>
-                    <a href="img/ftcande/1.jpeg">
-                        <img src="img/ftcande/1.jpeg" alt="ft1">
-                    </a>
-                    <a href="img/ftcande/2.jpeg">
-                        <img src="img/ftcande/2.jpeg" alt="ft2">
-                    </a>
-                </p>
-                <p>
-                    <a href="img/ftcande/3.jpeg">
-                        <img src="img/ftcande/3.jpeg" alt="ft3">
-                    </a>
-                    <a href="img/ftcande/4.jpeg">
-                        <img src="img/ftcande/4.jpeg" alt="ft4">
-                    </a>
-                </p>
-                <button class="atras">◀</button>
-                <button class="adelante">▶</button>
-            </div>
 
-            <div class="puntos"></div>
+                <div class="imagenes">
+                    <img src="img/ftcande/1.jpg" alt="ft1" onclick="abrirImagen('img/ftcande/1.jpg')">
+                    <aside>
+                        <p>Bar Cerrado Producciones</p>
+                    </aside>
+                </div>
+
+                <div class="imagenes">
+                    <img src="img/ftcande/2.jpg" alt="ft2" onclick="abrirImagen('img/ftcande/2.jpg')">
+                    <aside>
+                        <p>Foto fija-"El robo"</p>
+                    </aside>
+                </div>
+
+                <div class="imagenes">
+                    <img src="img/ftcande/3.jpg" alt="ft3" onclick="abrirImagen('img/ftcande/3.jpg')">
+                    <aside>
+                        <p>Asistencia de arte en "Es una lucha"</p>
+                    </aside>
+                </div>
+
+                <div class="imagenes">
+                    <img src="img/ftcande/4.jpg" alt="ft4" onclick="abrirImagen('img/ftcande/4.jpg')">
+                    <aside>
+                        <p>"Es una lucha"</p>
+                    </aside>
+                </div>
+
+                <div class="puntos"></div>
         </article>
-
-        </section>
-
-        <!-- <section id="helarte" class="contenido">
-            <h3>¿Qué es?</h3>
-            <p>"Helarte" es una Aventura Conversacional desarrollada como proyecto artístico multimedial.</p>
-
-
-            <div class="imagenes">
-                <div class="carrusel">
-                    <button class="atras">◀</button>
-                    <div class="img-contenedor-imagenes"></div>
-                    <button class="adelante">▶</button>
-                </div>
-                <div class="texto">
-                    <h3>Proyecto</h3>
-                    <p>Una descripción breve del proyecto Helarte.</p>
-                </div>
-            </div>
-            <div class="puntos"></div>
-            <button onclick="volver()">Volver al inicio</button>
-        </section> -->
 
         <section id="contacto" class="contenido">
             <h1>CONTACTANOS</h1>
@@ -210,6 +227,10 @@
     </footer>
 
     <script src="script.js"></script>
+
+    <div id="visor" class="visor">
+        <img id="img-grande">
+    </div>
 
 </body>
 
