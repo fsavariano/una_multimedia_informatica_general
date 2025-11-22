@@ -11,8 +11,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ---- mostrar / volver expuestos globalmente para los onclick del HTML ----
   function mostrar(id) {
-    const aside = document.querySelector('aside');
-    if (aside) aside.style.display = 'none';
+    const artistasContainer = document.querySelector('.artistas-container'); 
+    if (artistasContainer) artistasContainer.style.display = 'none';
+    const titulo = document.querySelector('.titulo');
+    if (titulo) titulo.style.display = 'none';
 
     const secciones = document.querySelectorAll('.contenido');
     secciones.forEach(sec => sec.style.display = 'none');
